@@ -1,5 +1,5 @@
-import soar.outputs.pioneer as p
-from soar.io import io
+import soar2.outputs.pioneer as p
+from soar2.io import io
 
 class Amigobot(p.Pioneer):
     def __init__(self):
