@@ -1,0 +1,5 @@
+import soar.outputs.pioneer
+
+class Amigobot(soar.outputs.pioneer.Pioneer):
+    pass
+        
