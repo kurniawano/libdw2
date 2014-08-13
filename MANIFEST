@@ -5,6 +5,8 @@ README.txt
 setup.py
 amigobot/__init__.py
 amigobot/amigobot.py
+examples/__init__.py
+examples/simple.py
 libdw/__init__.py
 libdw/basicGridMap.py
 libdw/bayesMap.py
