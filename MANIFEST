@@ -6,6 +6,7 @@ setup.py
 amigobot/__init__.py
 amigobot/amigobot.py
 examples/__init__.py
+examples/getinput.py
 examples/simple.py
 form/__init__.py
 form/common.py
