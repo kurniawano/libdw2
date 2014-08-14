@@ -186,7 +186,7 @@ class Pioneer:
   # Initialise connection to pioneer on specified port
   def __init__(self):
     try:
-      from soar.serial import Serial
+      from soar2.serial import Serial
     except ImportError:
       print "You are missing some serial support libraries. Probably you are on windows and you need to get pywin32. Check out http://sourceforge.net/projects/pywin32/ for details."
       raise CancelGUIAction
@@ -249,7 +249,7 @@ class Pioneer:
       self.sendPacket([ArcosCmd.CLOSE])
     self.connectionState = STATE_NO_SYNC
     self.sonarsChanged = [0,0,0,0,0,0,0,0]
-    from soar.serial import Serial
+    from soar2.serial import Serial
     self.open(Serial)
     self.cmdEnable(1)
     self.startSerialThread()

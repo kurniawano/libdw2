@@ -20,24 +20,24 @@ import form.widgets as widgets
 import form.formulae as formulae
 import form.common as common
 import form.parallel as parallel
-from soar.io import io
-import soar.io.userfn
-from soar.io.userfn import UserFunctionIF
-import soar.graphics
-from soar.graphics.sonarmonitor import SonarMonitor
-from soar.graphics.scope import Oscilloscope
-from soar.outputs.simulator import ROBOT_POINTS
+from soar2.io import io
+import soar2.io.userfn
+from soar2.io.userfn import UserFunctionIF
+import soar2.graphics
+from soar2.graphics.sonarmonitor import SonarMonitor
+from soar2.graphics.scope import Oscilloscope
+from soar2.outputs.simulator import ROBOT_POINTS
 
 import form.settings as settings
 
 import subprocess
 import os
 
-import soar
+import soar2
 import traceback
 
 # This import hooks the version number into settings
-import soar.version
+import soar2.version
 
 #####################################Notes######################################
 # This is the form startup script for soar. It configures form for all of
@@ -51,7 +51,7 @@ class application(object):
   def __init__(self):
     app.soar = self
     self.top = app.top
-    app.top.wm_title('soar'+soar.version.format_version())
+    app.top.wm_title('soar'+soar2.version.format_version())
     app.top.protocol('WM_DELETE_WINDOW', self.exit)
 
     self.initializeNamespace()
@@ -59,7 +59,7 @@ class application(object):
     io.configure_io(self.namespace)
     self.soar_toolbar_commands = formulae.FormulaPool()
     self.flowtriplets = [(self.startstepper, self.step, self.stopstepper)]
-    soar_dir = soar.__path__[0]
+    soar_dir = soar2.__path__[0]
     self.readConfigFile()
     if self.main_geom:
       app.top.geometry(self.main_geom[self.main_geom.find('+'):])
@@ -178,7 +178,7 @@ class application(object):
 
   def readConfigFile(self):
     # defaults for if no file exists
-    self.simulator_dir_default = soar.__path__[0] + "/worlds"
+    self.simulator_dir_default = soar2.__path__[0] + "/worlds"
     self.brain_dir_default = '~'
     self.main_geom = None
     self.simulator_geom = None
@@ -258,7 +258,7 @@ class application(object):
     print "Ordinary output will appear in this window."
 
   def openSimulator(self, world):
-    import soar.outputs.simulator
+    import soar2.outputs.simulator
     if (len(world) > 0):
       #self.enableButton(self.reloadWorldButton)
       # do this before we try to read the file so we can reload even
@@ -267,7 +267,7 @@ class application(object):
         self.enableButton(self.reloadAllButton)
       try:
         self.setOutput(lambda: \
-                         soar.outputs.simulator.Simulator(world, 
+                         soar2.outputs.simulator.Simulator(world, 
                                                           self.simulator_geom))
       except:
         sys.stderr.write("Error loading world.  Perhaps you accidentally chose a brain file?\n")
@@ -280,12 +280,12 @@ class application(object):
       self.reloadBrain(True)
 
   def openPioneer(self):
-    import soar.outputs.pioneer
+    import soar2.outputs.pioneer
     # allow pioneer button to be unpushed to disconnect
     if self.toolbar.buttons['pioneer'].cget('relief') == SUNKEN:
       self.closePioneer(False)
     else:
-      if self.setOutput(lambda: soar.outputs.pioneer.Pioneer()):
+      if self.setOutput(lambda: soar2.outputs.pioneer.Pioneer()):
         #self.disableButton(self.reloadWorldButton)
         self.disableButton(self.reloadAllButton)
         # allowing reinit to pioneer is most likely to cause crashing, so don't
@@ -313,7 +313,7 @@ class application(object):
     self.disableButton(self.reloadAllButton)
 
   def openBrain(self, brainfile, reload=False):
-    import soar.controls.brain
+    import soar2.controls.brain
     if (len(brainfile) > 0):
       # clear error, output windows
       self.clearOutput()
@@ -323,7 +323,7 @@ class application(object):
       else:
         print "***Loading Brain***" 
       print "'" + brainfile + "'" 
-      self.setControl(lambda: soar.controls.brain.Brain(brainfile, reload), 
+      self.setControl(lambda: soar2.controls.brain.Brain(brainfile, reload), 
                       not reload)
       if self.control:
         self.pushToolbarButton('brain', self.ENABLED)
@@ -367,7 +367,7 @@ class application(object):
 
   def openSonarMonitor(self):
     if not self.sonarMonitor:
-      self.sonarMonitor = SonarMonitor(soar.outputs.simulator.ROBOT_POINTS,
+      self.sonarMonitor = SonarMonitor(soar2.outputs.simulator.ROBOT_POINTS,
                                        self.sonarmon_geom)
     self.sonarMonitor.openWindow()
 
@@ -376,8 +376,8 @@ class application(object):
       self.sonarMonitor.closeWindow()
 
   def openJoystick(self):
-    import soar.controls.joystick
-    self.setControl(lambda: soar.controls.joystick.Joystick())
+    import soar2.controls.joystick
+    self.setControl(lambda: soar2.controls.joystick.Joystick())
     #CHANGED commented out
     #self.pushToolbarButton('joystick')
     self.unpushToolbarButton('brain')

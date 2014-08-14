@@ -1,5 +1,5 @@
-import soar.util as util
-from soar.util import *
+import soar2.util as util
+from soar2.util import *
 
 robotRadius = 0.2
 
@@ -82,30 +82,30 @@ class Action:
                util.prettyString([self.fvel, self.rvel, self.voltage])
 
 def registerUserFunction(type, f):
-    soar.registerUserFunction(type, f)
+    soar2.registerUserFunction(type, f)
 
 def done(donep = True):
     if donep:
-        soar.stopall()
+        soar2.stopall()
 
 def sonarMonitor(on=True):
     if on:
-        soar.openSonarMonitor()
+        soar2.openSonarMonitor()
     else:
-        soar.closeSonarMonitor()
+        soar2.closeSonarMonitor()
             
 def oscilloscope(on=True):
     if on:
-        soar.openOscillo()
+        soar2.openOscillo()
     else:
-        soar.closeOscillo()
+        soar2.closeOscillo()
             
 def addScopeProbeFunction(name, func):
-    soar.openOscillo()
-    soar.addScopeProbeFunction(name, func)
+    soar2.openOscillo()
+    soar2.addScopeProbeFunction(name, func)
 
 def clearScope():
-    soar.clearScope()
+    soar2.clearScope()
     
 #def beep(beepFreq = 440, beepDuration = 0.5):
 #    app.cmdSay(beepFreq, beepDuration)

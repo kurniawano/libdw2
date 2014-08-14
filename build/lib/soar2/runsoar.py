@@ -1,4 +1,4 @@
 import form.main
-import soar
-import soar.application
-form.main.Application(soar.application.application)
+import soar2
+import soar2.application
+form.main.Application(soar2.application.application)

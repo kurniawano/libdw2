@@ -9,8 +9,8 @@
 # the io.py file.  However it seems to introduce some kind of lag that 
 # makes the really complicated labs with localization stuff work poorly
 
-import soar.util
-from soar.util import *
+import soar2.util
+from soar2.util import *
 
 robotRadius = 0.2
 
